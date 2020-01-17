@@ -1,18 +1,6 @@
-<html>
-    <head>
-        <title>Soda Fountain</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    </head>
-    <body>
-        <div class="page-header">
-            {% if user.is_authenticated %}
-                <a href="{% url 'menu_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-            {% endif %}
-            <h1><a href="/">Soda Fountain</a></h1>
-        </div>
-        <div class="content container">
-            <div class="row">
+{% extends "layout.html" %}
+
+{% block content %}
                 <div class="col-md-8">
                     <h1>Change menu</h1>
                     <form action="" method="POST">{% csrf_token %}
@@ -29,10 +17,7 @@
                         <label for="expiration_date">Expiration Date:</label>
                         <input type="text" name="expiration_date" value="{{ menu.expiration_date|date:"m/d/Y" }}">
                         <br />
-                        <input type="submit" value="Submit" /> 
+                        <input type="submit" value="Submit" />
                     </form>
                 </div>
-            </div>
-        </div>
-    </body>
-</html>
+{% endblock %}
