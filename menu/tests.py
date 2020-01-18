@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from .models import Menu, Item
+from .models import Menu, Item, Ingredient
 
 class MenuModelTests(TestCase):
     def test_Menu_creation(self):
@@ -102,3 +102,10 @@ class ItemViewTest(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(self.item, resp.context['item'])
         self.assertTemplateUsed(resp, 'menu/detail_item.html')
+
+class IngredientModelTests(TestCase):
+    def test_ingredient_creation(self):
+        ingredient = Ingredient.objects.create(
+            name = "test name",
+        )
+        self.assertEqual("test name", ingredient.name)  
