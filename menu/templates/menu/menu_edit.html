@@ -2,10 +2,14 @@
 
 {% block content %}
                 <div class="col-md-8">
-                    <h1>Change menu</h1>
+                  {% if title %}
+                    <h1>Edit Menu</h1>
+                  {% else %}
+                    <h1>Create New Menu</h1>
+                  {% endif %}
                     <form method="POST" class="menu-form">{% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit" class="save btn btn-default">Save</button>
                     </form>
                 </div>
-{% endblock %}          
+{% endblock %}

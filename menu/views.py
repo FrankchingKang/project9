@@ -37,14 +37,13 @@ def create_new_menu(request):
 
 def edit_menu(request, pk):
     menu = get_object_or_404(Menu, pk=pk)
-    items = Item.objects.all()
+    form = MenuForm(instance=menu)
+    title = "Edit Menu"
     if request.method == "POST":
-        menu.season = request.POST.get('season', '')
-        menu.expiration_date = datetime.strptime(request.POST.get('expiration_date', ''), '%m/%d/%Y')
-        menu.items = request.POST.get('items', '')
-        menu.save()
+        form = MenuForm(instance=menu, data=request.POST)
+        if form.is_valid():
+            menu = form.save(commit=False)
+            menu.save()
+            return render(request, 'menu/menu_detail.html', {'menu': menu})
 
-    return render(request, 'menu/change_menu.html', {
-        'menu': menu,
-        'items': items,
-        })
+    return render(request, 'menu/menu_edit.html', {'form': form, 'title': title })
