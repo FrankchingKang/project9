@@ -19,6 +19,10 @@
                             <div class="date">
                                 Menu expires on {{ menu.expiration_date|date:"F j, Y" }}
                             </div>
+                        {% else %}
+                        <div class="date">
+                            None 
+                        </div>
                         {% endif %}
                     </div>
                 </div>

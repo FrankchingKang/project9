@@ -29,6 +29,7 @@ def create_new_menu(request):
             menu = form.save(commit=False)
             menu.created_date = timezone.now()
             menu.save()
+            form.save_m2m()
             return redirect('menu_detail', pk=menu.pk)
     else:
         form = MenuForm()
@@ -43,6 +44,7 @@ def edit_menu(request, pk):
         if form.is_valid():
             menu = form.save(commit=False)
             menu.save()
+            form.save_m2m()
             return render(request, 'menu/menu_detail.html', {'menu': menu})
 
     return render(request, 'menu/menu_edit.html', {'form': form, 'title': title })
